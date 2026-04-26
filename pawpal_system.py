@@ -59,19 +59,25 @@ class Scheduler:
     def build_schedule(self):
         tasks = self.owner.get_all_tasks()
 
-        # Sort by time and priority
-        tasks.sort(key=lambda t: (t.time, -t.priority))
-
         schedule = []
         explanations = []
         used_times = set()
 
+        # sort by priority first (AI decision)
+        tasks.sort(key=lambda t: (-t.priority, t.time))
+
         for task in tasks:
+
+            # 🔒 GUARDRAIL (validation)
+            if not task.time or ":" not in task.time:
+                explanations.append(f"{task.description} skipped due to invalid time")
+                continue
+
             if task.time not in used_times:
                 schedule.append(task)
                 used_times.add(task.time)
                 explanations.append(
-                    f"{task.description} scheduled at {task.time} because of priority {task.priority}"
+                    f"{task.description} scheduled at {task.time} (priority {task.priority})"
                 )
             else:
                 explanations.append(

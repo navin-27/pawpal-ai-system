@@ -32,10 +32,12 @@ if pet_names:
     selected_pet = st.selectbox("Select Pet", pet_names)
     task_desc = st.text_input("Task Description")
     task_time = st.text_input("Time (HH:MM)", placeholder="08:00")
+    priority = st.slider("Priority (1-5)", 1, 5, 3)
 
     if st.button("Add Task"):
         if task_desc and task_time:
             task = Task(task_desc, task_time)
+            task.priority = priority
 
             for pet in st.session_state.owner.pets:
                 if pet.name == selected_pet:

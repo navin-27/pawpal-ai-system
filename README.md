@@ -25,6 +25,8 @@ The system uses a simple decision-making algorithm to simulate AI behavior.
 
 This makes the system transparent and easy to understand.
 
+This system simulates AI behavior using rule-based decision making and explanation generation.
+
 ---
 
 ## ⚙️ Setup Instructions
@@ -146,10 +148,14 @@ Explanation:
 
 ---
 
-## 🧠 Reflection
+## Reflection
 
-This project helped me understand how scheduling systems work and how conflicts can be resolved automatically.
+During this project, I used AI tools to help with debugging, structuring classes, and improving scheduling logic.
 
-I learned how to design a system that not only schedules tasks but also explains decisions. The explanation feature made it easier to understand why certain tasks were chosen or skipped.
+One helpful suggestion was how to design the Scheduler class and implement conflict detection. This improved the modular design of the system.
 
-I also realized that even simple systems can behave differently under different scenarios, which makes testing very important.
+However, some AI suggestions were too generic or did not fully match the project requirements. I had to modify them to ensure correct behavior.
+
+This project showed me that AI systems must be tested carefully. Even simple rule-based systems can behave differently under different scenarios.
+
+In the future, I would improve this system by adding learning-based behavior, better prioritization, and adaptive scheduling.
