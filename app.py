@@ -64,3 +64,20 @@ conflicts = scheduler.detect_conflicts()
 
 if conflicts:
     st.warning("⚠ Task conflicts detected!")
+
+# ------------------ AI SCHEDULE (NEW FEATURE) ------------------
+st.header("🤖 Smart AI Schedule")
+
+if st.button("Generate Smart Schedule"):
+    scheduler = Scheduler(st.session_state.owner)
+    schedule, explanations = scheduler.build_schedule()
+
+    st.success("AI Schedule Generated!")
+
+    st.write("### 📅 Final Schedule")
+    for task in schedule:
+        st.write(f"{task.time} - {task.description}")
+
+    st.write("### 🧠 Explanations")
+    for e in explanations:
+        st.write(e)

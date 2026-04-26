@@ -9,6 +9,7 @@ class Task:
     time: str
     frequency: str = "once"
     completed: bool = False
+    priority: int = 0
 
     def mark_complete(self):
         self.completed = True
@@ -54,6 +55,30 @@ class Owner:
 class Scheduler:
     def __init__(self, owner: Owner):
         self.owner = owner
+
+    def build_schedule(self):
+        tasks = self.owner.get_all_tasks()
+
+        # Sort by time and priority
+        tasks.sort(key=lambda t: (t.time, -t.priority))
+
+        schedule = []
+        explanations = []
+        used_times = set()
+
+        for task in tasks:
+            if task.time not in used_times:
+                schedule.append(task)
+                used_times.add(task.time)
+                explanations.append(
+                    f"{task.description} scheduled at {task.time} because of priority {task.priority}"
+                )
+            else:
+                explanations.append(
+                    f"{task.description} skipped due to conflict at {task.time}"
+                )
+
+        return schedule, explanations
 
     # ✅ Improved sorting
     def get_sorted_tasks(self):
