@@ -223,4 +223,4 @@ I also realized that even simple rule-based systems can simulate AI behavior, bu
 
 ## 🎥 Demo Video
 
-(Add your Loom video link here)
+https://www.loom.com/share/9e6187c661ed4a618956883560bd1110 
