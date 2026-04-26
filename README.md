@@ -6,36 +6,50 @@ This project is an extension of my PawPal+ system from Module 2. The original sy
 
 ## 🚀 Features
 
-- Add pets and tasks
-- View daily schedule
-- Tasks sorted by time
-- Filter tasks by status
-- Detect scheduling conflicts
-- Support for recurring (daily) tasks
+* Add pets and tasks
+* View daily schedule
+* Tasks sorted by time
+* Detect scheduling conflicts
+* Smart AI scheduling with explanations
 
 ---
 
-## 🧠 Smarter Scheduling
+## 🧠 AI Scheduling Logic
 
-- Tasks are sorted using time-based logic
-- Conflicts are detected when tasks share the same time
-- Recurring tasks automatically generate new instances
-- Filtering allows viewing tasks by completion status
+The system uses a simple decision-making algorithm to simulate AI behavior.
+
+* Tasks are sorted by time and priority
+* If two tasks occur at the same time, only one is selected
+* Lower priority tasks are skipped
+* The system generates explanations for every decision
+
+This makes the system transparent and easy to understand.
 
 ---
 
-## 🧪 Testing PawPal+
+## ⚙️ Setup Instructions
 
-Run tests using:
+1. Install dependencies:
 
 ```bash
-python -m pytest
+pip install streamlit
+```
 
-## System Architecture
+2. Run the app:
+
+```bash
+python -m streamlit run app.py
+```
+
+---
+
+## 🧩 System Architecture
 
 User → Streamlit UI → Scheduler → Tasks → Output
 
 The Scheduler processes tasks, detects conflicts, and generates explanations.
+
+---
 
 ## 🧩 System Design (UML)
 
@@ -66,56 +80,73 @@ class Task {
 class Scheduler {
   +owner
   +get_sorted_tasks()
-  +filter_tasks()
   +detect_conflicts()
+  +build_schedule()
 }
 
 Owner --> Pet
 Pet --> Task
 Scheduler --> Owner
+```
 
-## Experiments Tried
+---
+
+## 🧪 Experiments Tried
 
 ### Scenario 1: No Conflict
-- Tasks: Feed (08:00), Walk (09:00)
-- Result: Both tasks scheduled
-- Explanation: No conflicts detected
+
+* Tasks: Feed (08:00), Walk (09:00)
+* Result: Both tasks scheduled
 
 ### Scenario 2: Conflict at Same Time
-- Tasks: Feed (08:00), Walk (08:00)
-- Result: Only one task scheduled
-- Explanation: Lower priority task skipped due to conflict
+
+* Tasks: Feed (08:00), Walk (08:00)
+* Result: One task skipped
 
 ### Scenario 3: Multiple Pets
-- Dog: Feed (08:00)
-- Cat: Feed (08:00)
-- Result: Only one task scheduled
-- Explanation: Conflict detected across pets, one task skipped
 
-## Testing Summary
+* Dog: Feed (08:00)
+* Cat: Feed (08:00)
+* Result: Conflict handled across pets
 
-I tested the system using different scenarios:
+---
 
-- No conflict → all tasks scheduled correctly
-- Same time tasks → one task skipped
-- Multiple pets → conflicts handled across pets
+## 🧪 Testing Summary
 
-All scenarios worked as expected. The system consistently avoided scheduling conflicts and provided explanations.
+I tested the system using multiple scenarios:
 
-## Sample Interaction
+* No conflicts → all tasks scheduled
+* Same time tasks → conflicts resolved
+* Multiple pets → handled correctly
+
+All tests passed and the system behaved consistently.
+
+---
+
+## 💡 Sample Interaction
 
 Input:
-- Feed dog at 08:00
-- Walk dog at 08:00
+
+* Feed dog at 08:00
+* Walk dog at 08:00
 
 Output:
-- Feed scheduled
-- Walk skipped due to conflict
+
+* Feed scheduled
+* Walk skipped
 
 Explanation:
 "Walk skipped due to conflict at 08:00"
 
-## Reflection
+---
+
+## 🎥 Demo
+
+(Add your Loom video link here)
+
+---
+
+## 🧠 Reflection
 
 This project helped me understand how scheduling systems work and how conflicts can be resolved automatically.
 
