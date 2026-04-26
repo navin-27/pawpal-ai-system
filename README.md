@@ -1,6 +1,10 @@
+# 🐾 PawPal+ AI Scheduling System
+
 ## Project Evolution
 
-This project is an extension of my PawPal+ system from Module 2. The original system only displayed tasks, but this version adds AI-like scheduling, conflict detection, and explanations.
+This project is an extension of my PawPal+ system from Module 2. The original system allowed users to add pets and tasks and view a simple schedule.
+
+In this version, I enhanced the system by adding AI-like scheduling logic, conflict detection, priority-based decisions, and explanation generation. The system now makes decisions about which tasks to schedule and explains why.
 
 ---
 
@@ -8,24 +12,23 @@ This project is an extension of my PawPal+ system from Module 2. The original sy
 
 * Add pets and tasks
 * View daily schedule
-* Tasks sorted by time
 * Detect scheduling conflicts
+* Priority-based task selection
 * Smart AI scheduling with explanations
+* Input validation (guardrails)
 
 ---
 
-## 🧠 AI Scheduling Logic
+## 🧠 AI Feature: Smart Scheduling
 
-The system uses a simple decision-making algorithm to simulate AI behavior.
+The system simulates AI behavior using rule-based decision making:
 
-* Tasks are sorted by time and priority
-* If two tasks occur at the same time, only one is selected
-* Lower priority tasks are skipped
-* The system generates explanations for every decision
+* Tasks are sorted by **priority and time**
+* When conflicts occur, the system selects the **higher priority task**
+* Invalid inputs (like incorrect time format) are ignored
+* The system generates explanations for each decision
 
-This makes the system transparent and easy to understand.
-
-This system simulates AI behavior using rule-based decision making and explanation generation.
+This creates a transparent and interpretable decision-making process similar to an AI system.
 
 ---
 
@@ -37,10 +40,16 @@ This system simulates AI behavior using rule-based decision making and explanati
 pip install streamlit
 ```
 
-2. Run the app:
+2. Run the application:
 
 ```bash
 python -m streamlit run app.py
+```
+
+3. Run tests:
+
+```bash
+python test_system.py
 ```
 
 ---
@@ -49,7 +58,7 @@ python -m streamlit run app.py
 
 User → Streamlit UI → Scheduler → Tasks → Output
 
-The Scheduler processes tasks, detects conflicts, and generates explanations.
+The Scheduler processes tasks, applies decision logic, resolves conflicts, and generates explanations.
 
 ---
 
@@ -74,16 +83,14 @@ class Pet {
 class Task {
   +description
   +time
-  +frequency
+  +priority
   +completed
-  +mark_complete()
 }
 
 class Scheduler {
   +owner
-  +get_sorted_tasks()
-  +detect_conflicts()
   +build_schedule()
+  +detect_conflicts()
 }
 
 Owner --> Pet
@@ -93,7 +100,7 @@ Scheduler --> Owner
 
 ---
 
-## 🧪 Experiments Tried
+## 🧪 Experiments and Scenarios
 
 ### Scenario 1: No Conflict
 
@@ -103,9 +110,9 @@ Scheduler --> Owner
 ### Scenario 2: Conflict at Same Time
 
 * Tasks: Feed (08:00), Walk (08:00)
-* Result: One task skipped
+* Result: One task scheduled based on priority
 
-### Scenario 3: Multiple Pets
+### Scenario 3: Multiple Pets Conflict
 
 * Dog: Feed (08:00)
 * Cat: Feed (08:00)
@@ -115,13 +122,26 @@ Scheduler --> Owner
 
 ## 🧪 Testing Summary
 
-I tested the system using multiple scenarios:
+I created a test script (`test_system.py`) to evaluate system behavior.
 
-* No conflicts → all tasks scheduled
-* Same time tasks → conflicts resolved
-* Multiple pets → handled correctly
+Results:
 
-All tests passed and the system behaved consistently.
+* Test 1 (no conflict): Passed
+* Test 2 (conflict): Passed
+
+The system consistently handled conflicts and produced correct schedules.
+
+---
+
+## 🛡️ Reliability and Guardrails
+
+The system includes guardrails to improve reliability:
+
+* Tasks with invalid time formats are skipped
+* Conflicts are resolved using priority-based selection
+* Explanations are generated for all decisions
+
+These features ensure consistent and predictable behavior.
 
 ---
 
@@ -142,20 +162,28 @@ Explanation:
 
 ---
 
-## 🎥 Demo
+## 🤖 AI Collaboration
 
-(Add your Loom video link here)
+I used AI tools to assist with debugging, improving code structure, and designing the scheduling logic.
+
+One helpful suggestion was organizing the system using classes such as Owner, Pet, Task, and Scheduler, which improved modularity.
+
+However, some AI suggestions were too generic or did not fully match the project requirements. I had to adjust the logic to correctly handle conflicts and priorities.
+
+This experience showed me that AI is helpful for guidance, but human validation is necessary.
 
 ---
 
-## Reflection
+## 🧠 Reflection
 
-During this project, I used AI tools to help with debugging, structuring classes, and improving scheduling logic.
+This project helped me understand how scheduling systems work and how conflicts can be resolved automatically.
 
-One helpful suggestion was how to design the Scheduler class and implement conflict detection. This improved the modular design of the system.
+I learned how to design a system that not only makes decisions but also explains them. This made the system more transparent and easier to understand.
 
-However, some AI suggestions were too generic or did not fully match the project requirements. I had to modify them to ensure correct behavior.
+I also realized that even simple rule-based systems can simulate AI behavior, but they have limitations and require careful testing.
 
-This project showed me that AI systems must be tested carefully. Even simple rule-based systems can behave differently under different scenarios.
+---
 
-In the future, I would improve this system by adding learning-based behavior, better prioritization, and adaptive scheduling.
+## 🎥 Demo Video
+
+(Add your Loom video link here)
