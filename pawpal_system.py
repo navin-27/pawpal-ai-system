@@ -73,6 +73,18 @@ class Scheduler:
                 explanations.append(f"{task.description} skipped due to invalid time")
                 continue
 
+            # Validate time format (HH:MM)
+            try:
+                parts = task.time.split(":")
+                if len(parts) != 2:
+                    raise ValueError("Invalid time format")
+                hours, minutes = int(parts[0]), int(parts[1])
+                if not (0 <= hours < 24 and 0 <= minutes < 60):
+                    raise ValueError("Hours must be 0-23, minutes must be 0-59")
+            except (ValueError, IndexError):
+                explanations.append(f"{task.description} skipped due to invalid time")
+                continue
+
             if task.time not in used_times:
                 schedule.append(task)
                 used_times.add(task.time)

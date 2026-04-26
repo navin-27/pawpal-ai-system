@@ -54,6 +54,43 @@ python test_system.py
 
 ---
 
+## 📊 Sample Input/Output
+
+### Example 1: No Conflicts
+**Input:**
+- Pet: "Buddy"
+- Task 1: "Feed dog" at "08:00" (priority 5)
+- Task 2: "Walk dog" at "09:00" (priority 3)
+
+**Output:**
+```
+Feed dog scheduled at 08:00 (priority 5)
+Walk dog scheduled at 09:00 (priority 3)
+```
+
+### Example 2: Conflict Resolution
+**Input:**
+- Pet: "Buddy"
+- Task 1: "Feed dog" at "08:00" (priority 5)
+- Task 2: "Play" at "08:00" (priority 2)
+
+**Output:**
+```
+Feed dog scheduled at 08:00 (priority 5)
+Play skipped due to conflict at 08:00
+```
+
+### Example 3: Invalid Time Format
+**Input:**
+- Task: "Feed" at "25:99" (invalid)
+
+**Output:**
+```
+Feed skipped due to invalid time
+```
+
+---
+
 ## 🧩 System Architecture
 
 User → Streamlit UI → Scheduler → Tasks → Output
